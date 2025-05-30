@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.10)
-project(EnemyPool)
+cmake_minimum_required(VERSION 3.14)
+project(EnemyPool LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -7,28 +7,35 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(EnemyPoolLib STATIC
     Spider.cpp
     EnemyPool.cpp
-    EnemyPool.h
     Spider.h
+    EnemyPool.h
 )
+
+target_include_directories(EnemyPoolLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(EnemyPoolMain main.cpp)
 target_link_libraries(EnemyPoolMain EnemyPoolLib)
 
-enable_testing()
-find_package(GTest REQUIRED)
+option(BUILD_TESTS "Build tests" ON)
 
-add_executable(EnemyPoolTests
-    ../tests/test_spider.cpp
-    ../tests/test_enemy_pool.cpp
-    Spider.cpp
-    EnemyPool.cpp
-)
+if(BUILD_TESTS)
+    enable_testing()
 
-target_link_libraries(EnemyPoolTests
-    GTest::GTest
-    GTest::Main
-    EnemyPoolLib
-)
+    add_subdirectory(third-party/googletest)
 
-add_test(NAME SpiderTest COMMAND EnemyPoolTests --gtest_filter=SpiderTest*)
-add_test(NAME EnemyPoolTest COMMAND EnemyPoolTests --gtest_filter=EnemyPoolTest*)
+    file(GLOB ENEMYPOOL_TEST_SOURCES ../tests/*.cpp)
+
+    add_executable(EnemyPoolTests
+        ${ENEMYPOOL_TEST_SOURCES}
+        Spider.cpp
+        EnemyPool.cpp
+    )
+    
+    target_link_libraries(EnemyPoolTests
+        EnemyPoolLib
+        gtest_main
+        gmock_main
+    )
+
+    add_test(NAME EnemyPoolTests COMMAND EnemyPoolTests)
+endif()
