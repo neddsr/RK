@@ -7,13 +7,13 @@ using namespace std;
 class Spider
 {
 public:
+	static int created;
 	Spider() : hitpoints(0.0) { this->counter = ++created; }
 	void init(string name, double hitpoints, double damage) { this->name = name; this->hitpoints = hitpoints; this->damage = damage; }
 	void attack();
 	bool isAlive() const { return hitpoints > 0; }
 	void getDamage(int damage);
-	
-	static int created;
+
 private:
 	string name;
 	int counter;
