@@ -14,10 +14,11 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake
+        sudo apt-get install -y build-essential cmake lcov
         
     - name: Configure and build
       run: |
+        cd Object_Pool_Design_Pattern
         mkdir build
         cd build
         cmake .. -DBUILD_TESTS=ON
@@ -25,5 +26,5 @@ jobs:
         
     - name: Run tests
       run: |
-        cd build
+        cd Object_Pool_Design_Pattern/build
         ctest --output-on-failure
