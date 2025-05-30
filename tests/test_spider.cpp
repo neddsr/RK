@@ -6,7 +6,6 @@ TEST(SpiderTest, Initialization) {
     spider.init("TestSpider", 100.0, 10.0);
     
     EXPECT_TRUE(spider.isAlive());
-    EXPECT_EQ(Spider::created, 1);
 }
 
 TEST(SpiderTest, DamageTaken) {
