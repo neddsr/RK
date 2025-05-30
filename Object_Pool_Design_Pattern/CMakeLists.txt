@@ -21,7 +21,7 @@ option(BUILD_TESTS "Build tests" ON)
 if(BUILD_TESTS)
     enable_testing()
 
-    add_subdirectory(../third-party/googletest)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/../third-party/googletest)
 
     file(GLOB ENEMYPOOL_TEST_SOURCES ../tests/*.cpp)
 
