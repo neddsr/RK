@@ -7,8 +7,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(EnemyPoolLib STATIC
     Spider.cpp
     EnemyPool.cpp
-    Spider.h
-    EnemyPool.h
 )
 
 target_include_directories(EnemyPoolLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
