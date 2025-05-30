@@ -4,8 +4,6 @@
 #include <iostream>
 #include "EnemyPool.h"
 
-int Spider::created = 0;
-
 int main(int argc, char **argv)
 {
 	//initialize random number generator
