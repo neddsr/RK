@@ -14,6 +14,15 @@ target_include_directories(EnemyPoolLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(EnemyPoolMain main.cpp)
 target_link_libraries(EnemyPoolMain EnemyPoolLib)
 
+install(TARGETS EnemyPoolMain
+        RUNTIME DESTINATION bin)
+
+install(TARGETS EnemyPoolLib
+        ARCHIVE DESTINATION lib)
+
+install(FILES Spider.h EnemyPool.h
+        DESTINATION include/EnemyPool)
+
 set(CPACK_PACKAGE_NAME "EnemyPool")
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_VENDOR "neddsr")
