@@ -14,6 +14,10 @@ target_include_directories(EnemyPoolLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(EnemyPoolMain main.cpp)
 target_link_libraries(EnemyPoolMain EnemyPoolLib)
 
+set(CPACK_PACKAGE_NAME "EnemyPool")
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+set(CPACK_PACKAGE_VENDOR "neddsr")
+
 option(BUILD_TESTS "Build tests" ON)
 
 if(BUILD_TESTS)
