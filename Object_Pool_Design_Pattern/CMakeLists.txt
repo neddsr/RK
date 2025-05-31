@@ -18,6 +18,8 @@ set(CPACK_PACKAGE_NAME "EnemyPool")
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_VENDOR "neddsr")
 
+include(CPack)
+
 option(BUILD_TESTS "Build tests" ON)
 
 if(BUILD_TESTS)
