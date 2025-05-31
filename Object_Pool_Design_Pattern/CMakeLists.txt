@@ -17,6 +17,8 @@ target_link_libraries(EnemyPoolMain EnemyPoolLib)
 set(CPACK_PACKAGE_NAME "EnemyPool")
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_VENDOR "neddsr")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "neddsr <random@example.com>")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "")
 
 include(CPack)
 
