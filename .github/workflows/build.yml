@@ -14,7 +14,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential cmake lcov
+        sudo apt-get install -y build-essential cmake lcov rpm
         
     - name: Configure and build
       run: |
@@ -28,3 +28,38 @@ jobs:
       run: |
         cd Object_Pool_Design_Pattern/build
         ctest --output-on-failure
+        
+    - name: Create DEB packages
+      if: github.event_name == 'push' && startWith(github.ref, 'refs/tags/v')
+      run: |
+        cd Object_Pool_Design_Pattern/build
+        mkdir -p _artifacts
+        cpack -G "DEB" && mv *.deb _artifacts/
+
+    - name: Upload artifacts
+      if: github.event_name == 'push' && startWith(github.ref, 'refs/tags/v')
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux_packages
+        path: Object_Pool_Design_Pattern/build/_artifacts/*
+        retention-days: 1
+
+  create_release:
+    needs: [build-and-test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create or Update Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          artifacts: artifacts/linux_packages/*
+          replacesArtifacts: true  
+          allowUpdates: true       
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+    
