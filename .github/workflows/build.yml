@@ -30,7 +30,7 @@ jobs:
         ctest --output-on-failure
         
     - name: Create DEB packages
-      if: github.event_name == 'push' && startWith(github.ref, 'refs/tags/v')
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
       run: |
         cd Object_Pool_Design_Pattern/build
         mkdir -p _artifacts
