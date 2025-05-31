@@ -54,4 +54,9 @@ if(BUILD_TESTS)
     )
 
     add_test(NAME EnemyPoolTests COMMAND EnemyPoolTests)
+
+    set_target_properties(EnemyPoolTests PROPERTIES 
+        EXCLUDE_FROM_INSTALL TRUE
+    )
+    
 endif()
