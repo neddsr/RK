@@ -35,7 +35,8 @@ option(BUILD_TESTS "Build tests" ON)
 
 if(BUILD_TESTS)
     enable_testing()
-
+    set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+    
     add_subdirectory(${CMAKE_SOURCE_DIR}/../third-party/googletest 
                      ${CMAKE_BINARY_DIR}/googletest)
 
@@ -54,9 +55,4 @@ if(BUILD_TESTS)
     )
 
     add_test(NAME EnemyPoolTests COMMAND EnemyPoolTests)
-
-    set_target_properties(EnemyPoolTests PROPERTIES 
-        EXCLUDE_FROM_INSTALL TRUE
-    )
-    
 endif()
